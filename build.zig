@@ -10,9 +10,12 @@ pub fn build(b: *std.build.Builder) !void {
     exe.setBuildMode(mode);
     exe.install();
 
-    const run_cmd = exe.run();
-    run_cmd.step.dependOn(b.getInstallStep());
-    if (b.args) |args| {
-        run_cmd.addArgs(args);
-    }
+    const viceroy_step = b.addSystemCommand(&.{
+        "viceroy",
+        "-C",
+        "fastly.toml",
+        "zig-out/bin/app.wasm",
+    });
+    const run_step = b.step("run", "Run the app");
+    run_step.dependOn(&viceroy_step.step);
 }
