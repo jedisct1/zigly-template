@@ -1,0 +1,16 @@
+# This file describes a Fastly Compute@Edge package. To learn more visit:
+# https://developer.fastly.com/reference/fastly-toml/
+
+authors = ["nospam@please"]
+description = "Zigly template"
+language = "other"
+manifest_version = 1
+name = "zigly-test"
+service_id = ""
+
+[local_server]
+
+  [local_server.backends]
+
+    [local_server.backends.mybackend]
+      url = "https://ziglang.org"
